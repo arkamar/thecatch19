@@ -222,4 +222,16 @@ curl -b cook -c cook "${BERSERKERS_WEB}?answer=$(python out.py)" 2>/dev/null
 which prints out the flag `FLAG{A92w-i3vS-jBJB-B8A6}`.
 
 ## Berserker's Devices
+
+### Autonomous car
+
+> Hi Commander,
+>
+> the police has reported an abandoned autonomous car about 25 km away from the charging station. Our field team has arrived and performed an analysis on site. The car was rebellious one, but fortunately, its batteries were completely discharged (maybe the car relied on the officially announced driving range). The navigation system contains a lot of waypoints at different locations in big Czech cities, but there is nothing important located at given coordinates. Analyse the coordinates and find out what is going on.
+>
+> Good luck.
+
+Each GPS coordinate from given [file](autonomous_car/autonomous_car.gps) points to a building and its **House Number** is decimal representation of ASCII character.
+It wanted some man-work and patiency to build the flag `FLAG{nPmZ-XJkD-qQGw-boLo}`.
+
 ## Berserker's Communication
