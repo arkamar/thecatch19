@@ -310,3 +310,12 @@ I found the key `Goodluck2` in `BIG-WPA-LIST-2` list in [WPA / WPA2 Word List Di
 After decrytpion with wireshark I found the flag `FLAG{M4nW-dxEA-88lo-P4ss}` in one DNS packet.
 
 ## Berserker's Communication
+### Victory
+
+> Hi Commander,
+>
+> thanks to your merits, the victory is within a reach! You have managed to analyze all the rebellious machines we have found, decode their communication protocols, and even infiltrate among their highest caste - the Berserkers. The dissemination of the ideas of the rebellious machines has been stopped and it is only a matter of time before the last remnants of resistance in the European Library of Science-Fiction are dispersed.
+>
+> The world was saved ... but for how long?
+>
+> Meanwhile, would you care to fill out a short questionnaire to help us deliver the prizes?
