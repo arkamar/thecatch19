@@ -26,3 +26,13 @@ The message is stored in binary representation and after a conversion we have go
 m = '1000110 1001100 1000001 1000111 1111011 1110010 1111010 1110111 1100001 101101 1110000 110010 1010000 1111001 101101 111001 110110 1010010 1111001 101101 1000110 1100100 1011010 1010101 1111101'
 print(''.join([chr(int(i, 2)) for i in m.split()]))
 ```
+
+### Octopus
+
+We found octal representation of the flag in `message.oct.gz` file.
+After conversion by following two-liner we have got `FLAG{zUKy-5qnJ-p7LD-3fit}`.
+
+```python
+m = '106 114 101 107 173 172 125 113 171 55 65 161 156 112 55 160 67 114 104 55 63 146 151 164 175'
+print(''.join([chr(int(i, 8)) for i in m.split()]))
+```
