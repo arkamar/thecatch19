@@ -310,6 +310,56 @@ I found the key `Goodluck2` in `BIG-WPA-LIST-2` list in [WPA / WPA2 Word List Di
 After decrytpion with wireshark I found the flag `FLAG{M4nW-dxEA-88lo-P4ss}` in one DNS packet.
 
 ## Berserker's Communication
+
+### Colonel Roche
+
+> Hi Commander,
+>
+> did you know that the berserkers, which were assigned to specific tasks, have used to name themselves after humans famous in given field of specialization (this behaviour is maybe some bug in their firmware)? Our infiltrators - remotely operated classic devices equiped with stickers I'm smart and Death to humans - have discovered a new Berserker named Colonel Roche, which is responsible for encrypting the commands for the other less or more smart devices. Your previous successes obviously forced the Berserkers to improve the security of communication. You are supposed to find some way how to decrypt a captured message and read the issued command(s). The infiltrators report that this particular machine usually uses a day of week as a key (maybe monday, maybe saturday, maybe something else... they are not sure).
+>
+> Good luck!
+
+This one was a little bit tricky.
+I wasn't able to find anything related to the Colonel Roche and cryptography in English nor French.
+After many, many hours I tried to search something in Czech an I was finally lucky to find article about [Colonel Roche transposition cypher written in Czech](https://www2.epochtimes.cz/200809055985/Tajemstvi-sifer-po-stopach-kryptografie-a-steganografie-VI.html).
+Following script decrypts the message with a key `monday`
+```python
+msg = '463216327617246f67406f1266075ec622606c6671765537066636596e621e64e622c2b006066961c66e621f067676e77c6e665167a462c4b50477433617754222d7043542885747df6dd575970417d435223000'
+
+def key_idx(key):
+    l = [ (i, v) for i, v in enumerate(key) ]
+    l.sort(key = lambda a: a[1])
+    o = [None]*len(l)
+    for i, v in enumerate(l):
+        o[v[0]] = i + 1
+    return o
+
+def decrypt(msg, key):
+     ki = key_idx(key)
+     s = 0
+     t = [None] * len(ki)
+     for i, v in enumerate(ki):
+         t[i] = msg[s: s + v]
+         s += v
+     o = ''
+     j = 0
+     while s:
+         for i in t:
+             if j < len(i):
+                 o += i[j]
+                 s -= 1
+         j += 1
+     return o
+
+for i in range(0, len(msg), 21):
+    plain = decrypt(msg[i:], 'monday')
+    print(plain)
+```
+and after conversion from hex we find the message with the flag.
+```
+Broadcast on all frequencies and in all known languages: FLAG{uB8W-XBtp-OmtE-Q2Ys}
+```
+
 ### Victory
 
 > Hi Commander,
