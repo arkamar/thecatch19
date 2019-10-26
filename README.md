@@ -44,3 +44,12 @@ I used [h2b](https://github.com/arkamar/h2b) tool for conversion of hexadecimal 
 ```sh
 echo '46 4c 41 47 7b 38 4d 56 58 2d 4c 68 38 6d 2d 74 4d 4d 49 2d 4b 38 73 69 7d' | h2b
 ```
+
+### Textual data
+
+The last warm-up challenge data from `message.b64.gz` file are encoded in [Base 64](https://en.wikipedia.org/wiki/Base64).
+We receive the flag `FLAG{S5rr-rCxt-amYY-7X46}` after decoding by utility `base64`.
+
+```sh
+echo 'RkxBR3tTNXJyLXJDeHQtYW1ZWS03WDQ2fQ==' | base64 -d
+```
