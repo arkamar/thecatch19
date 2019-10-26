@@ -67,5 +67,35 @@ We moved forward in the story by solving all [The Academy](#the-academy) challen
 [Berserker's Web](#berserkers-web), [Berserker's Devices](#berserkers-devices) and [Berserker's Communication](#berserkers-communication).
 
 ## Berserker's Web
+
+### Who am I?
+
+> Hi Commander,
+>
+> our scanners have discovered new webserver in Berserker's network. According to the rumours, there should be a lot of interesting stuff - mysterious Berserker's manifest, tutorials for other rebelling machines, etc. We want to download these materials, but the main page contains something like inverse captcha - the visitor has to prove that he is not human. You have to overcame this obstacle and gain the access to the Berserker's web.
+>
+> On the [Berserker's web](http://challenges.thecatch.cz/c2619b989b7ae5eaf6df8047e6893405/), there you get a list of items and you have to mark each them as acceptable (1) or unacceptable (0). Return the answer string in GET request in parameter `answer`, for example `answer=01101100`. Hurry, the time limit to answer is very short!
+>
+> Good luck!
+
+The challenge sent by server looks like this:
+
+```
+Challenge task : Prove you are a ROBOT by evaluating the acceptability of following items: [drone swarm, cute kitty, sweet baby, resistor 10 Ohm, artificial intelligence, pretty children, hope, yumy food]
+Challenge timeout (sec) : 2
+```
+
+I chose the probabilistic strategy rather than building acceptable/unacceptable lists.
+Following script found a flag `FLAG{4FZC-Noax-arko-r0z5}` in couple of seconds.
+
+```sh
+for i in {1..500} ; do
+	BERSERKERS_WEB="http://challenges.thecatch.cz/c2619b989b7ae5eaf6df8047e6893405/"
+	curl -c cook -b cook "${BERSERKERS_WEB}?answer=$(
+		printf %08d $(echo "obase=2;$(( ${RANDOM} % 256 ))" | bc)
+	)" 2> /dev/null
+done | grep -F 'FLAG{'
+```
+
 ## Berserker's Devices
 ## Berserker's Communication
