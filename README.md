@@ -295,4 +295,18 @@ Unfortunately I spent quite some time trying to crack the MD5 hash `$1$4lUL$c/Jv
 This encryption is very week and I used [online decryptor](http://www.ifm.net.nz/cookbooks/passwordcracker.html) to find the password `ExtraStrong.Pa$$W0rd#`
 The flag was in one of TACACS+ packets decrypted by [wireshark](https://www.wireshark.org/) `FLAG{xQmi-X4x4-z3K2-8ALe}`
 
+### Vacuum cleaner
+
+> Hi Commander,
+>
+> one of rebellious smart robotic vacuum cleaner has been seen near the library. Our reconnaissance team was able to capture part of wireless communication between the vacuum cleaner and the main computer via rebellious wireless network. Analyse the captured traffic and find out the intentions of the vacuum cleaner(s).
+>
+> Good luck!
+
+I found the key `Goodluck2` in `BIG-WPA-LIST-2` list in [WPA / WPA2 Word List Dictionaries Downloads](https://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html) with `aircrack-ng` tool for following network:
+```
+   3  02:13:37:A7:06:FB  ThisIsTheWay              WPA (1 handshake)
+```
+After decrytpion with wireshark I found the flag `FLAG{M4nW-dxEA-88lo-P4ss}` in one DNS packet.
+
 ## Berserker's Communication
