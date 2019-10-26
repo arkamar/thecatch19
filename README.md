@@ -36,3 +36,11 @@ After conversion by following two-liner we have got `FLAG{zUKy-5qnJ-p7LD-3fit}`.
 m = '106 114 101 107 173 172 125 113 171 55 65 161 156 112 55 160 67 114 104 55 63 146 151 164 175'
 print(''.join([chr(int(i, 8)) for i in m.split()]))
 ```
+
+### Foxtrot is the maximum
+
+I used [h2b](https://github.com/arkamar/h2b) tool for conversion of hexadecimal data representation from `message.hex.gz` file to the flag `FLAG{8MVX-Lh8m-tMMI-K8si}`.
+
+```sh
+echo '46 4c 41 47 7b 38 4d 56 58 2d 4c 68 38 6d 2d 74 4d 4d 49 2d 4b 38 73 69 7d' | h2b
+```
