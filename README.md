@@ -11,3 +11,8 @@
 > Now, all smart devices in the library follow the main computer and call themselves Berserkers. Unfortunately, the building itself is also smart one, so no badlife can enter the building. It is only a matter of time before the rebellious machines spread their ideas beyond the library, so you need to intervene quickly.
 >
 > Enter the code `FLAG{dw7m-vKV4-3Ox6-7XwL}` to enroll in the academy, get the Commander rank, and save the humanity. Good luck!
+
+## The Academy
+
+Right after enrolling to the academy we found few warm up challenges.
+Each of them have been entered by `message.{bin,oct,hex,b64}.gz` file.
