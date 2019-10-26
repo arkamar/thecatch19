@@ -278,4 +278,21 @@ a=fmtp:101 0-16
 
 After reconstruction of audio stream we heard the flag `FLAG{1B6F-2REJ-0NO7-EWC4}`.
 
+### Payment Terminal
+
+> Hi Commander,
+>
+> one of the rebellious smart payment terminals in the library has somehow acquired access to the local networking devices and it has started to deploy its own configuration. Old network monitoring system under our control has captured the traffic of configuration deployment. We believe that you will be able to analyse the captured traffic, find some security problem in data transfer, and acquire the configuration file(s). Good luck!
+
+TFTP and TACACS+ configuration where I spotted those lines
+
+```
+enable secret 5 $1$4lUL$c/JvvfuMWNZyIh4lOJlBi.
+tacacs-server key 7 0804545A1B18360300040203641B256C770272010355
+```
+
+Unfortunately I spent quite some time trying to crack the MD5 hash `$1$4lUL$c/JvvfuMWNZyIh4lOJlBi.` unsuccessfully, but later on I realized that I should focus to a second line `0804545A1B18360300040203641B256C770272010355`.
+This encryption is very week and I used [online decryptor](http://www.ifm.net.nz/cookbooks/passwordcracker.html) to find the password `ExtraStrong.Pa$$W0rd#`
+The flag was in one of TACACS+ packets decrypted by [wireshark](https://www.wireshark.org/) `FLAG{xQmi-X4x4-z3K2-8ALe}`
+
 ## Berserker's Communication
