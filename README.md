@@ -16,3 +16,13 @@
 
 Right after enrolling to the academy we found few warm up challenges.
 Each of them have been entered by `message.{bin,oct,hex,b64}.gz` file.
+
+### Twosome
+
+Data from file `message.bin.gz` are set to the `m` variable in following two-liner.
+The message is stored in binary representation and after a conversion we have got the flag `FLAG{rzwa-p2Py-96Ry-FdZU}`.
+
+```python
+m = '1000110 1001100 1000001 1000111 1111011 1110010 1111010 1110111 1100001 101101 1110000 110010 1010000 1111001 101101 111001 110110 1010010 1111001 101101 1000110 1100100 1011010 1010101 1111101'
+print(''.join([chr(int(i, 2)) for i in m.split()]))
+```
