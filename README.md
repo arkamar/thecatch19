@@ -53,3 +53,19 @@ We receive the flag `FLAG{S5rr-rCxt-amYY-7X46}` after decoding by utility `base6
 ```sh
 echo 'RkxBR3tTNXJyLXJDeHQtYW1ZWS03WDQ2fQ==' | base64 -d
 ```
+
+### Commander's arrival
+
+We moved forward in the story by solving all [The Academy](#the-academy) challenges.
+
+> Hi Commander,
+>
+> congratulation for your promotion, we have waited impatiently for you. There are several challenges ahead of you - analyses of the rebellious devices (Berserkers), their communication and even some web pages used for spreading the Berserker's rebellion.
+>
+> Just enter the code `FLAG{9HJW-0EXM-ddZ8-k3xv}` to log into our command and control system. All mankind is counting on you, don't let them down!
+
+[Berserker's Web](#berserkers-web), [Berserker's Devices](#berserkers-devices) and [Berserker's Communication](#berserkers-communication).
+
+## Berserker's Web
+## Berserker's Devices
+## Berserker's Communication
