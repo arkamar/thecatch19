@@ -234,4 +234,48 @@ which prints out the flag `FLAG{A92w-i3vS-jBJB-B8A6}`.
 Each GPS coordinate from given [file](autonomous_car/autonomous_car.gps) points to a building and its **House Number** is decimal representation of ASCII character.
 It wanted some man-work and patiency to build the flag `FLAG{nPmZ-XJkD-qQGw-boLo}`.
 
+### Ice-cream selling machine
+
+> Hi Commander,
+>
+> our reconnaissance teams have discovered one of rebellious self-aware machine outside the library and identified it as smart ice-cream selling machine. It has some technical difficulties (we assume that the machine just has run out of ice cream) and started to call for help. Our wiretapping team has captured part of one attempt and we are sure that it contains special rescue code and we want it. Analyse the trafic and acquire the code.
+>
+> Good luck!
+
+I spotted the `SIP` protocol just in the first inspection of given file
+```sh
+zcat ice-cream_selling_machine.pcap.gz | strings
+```
+
+```
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 172.16.66.5:5060;received=172.16.66.5;branch=z9hG4bK32869031
+Call-ID: 48cef75f65b43324093a140a27778a8b@147.228.210.5:5060
+From: <sip:0605126168@172.16.66.5>;tag=as4dc37b00
+To: <sip:kostenec-1@172.16.66.10;ob>;tag=A6EH.E.kDyB9kvyDpd448v0dsQYTGZJp
+CSeq: 102 INVITE
+Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+Contact: "Test user" <sip:kostenec-1@172.16.66.10:61462;ob>
+Supported: replaces, 100rel, norefersub
+Content-Type: application/sdp
+Content-Length:   275
+
+v=0
+o=- 3769418938 3769418939 IN IP4 172.16.66.10
+s=pjmedia
+b=AS:117
+t=0 0
+a=X-nat:0
+m=audio 4032 RTP/AVP 8 101
+c=IN IP4 172.16.66.10
+b=TIAS:96000
+a=rtcp:4033 IN IP4 172.16.66.10
+a=sendrecv
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+```
+
+After reconstruction of audio stream we heard the flag `FLAG{1B6F-2REJ-0NO7-EWC4}`.
+
 ## Berserker's Communication
