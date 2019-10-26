@@ -165,5 +165,61 @@ curl -b cook -c cook -L "${BERSERKERS_WEB}/" | head -n1 | cut -c 18- | base64 -d
 curl -b cook -c cook -L "${BERSERKERS_WEB}/?answer=$(python update.py)"
 ```
 
+### The Infiltration
+
+> Hi Commander,
+>
+> with the patch "installed", we opened the way to an initiation ritual that would allow us to become a Berserker. The process is fully automated - we have discovered that you have to run some downloaded code, acquire unique password (co called B-code) and enter it to the web in given time limit. You have to overcome some difficulties, of course.
+>
+> Visit [Berserker's web](http://challenges.thecatch.cz/781473d072a8de7d454cddd463414034), there you can download your initiation challenge. The acquired code should be returned to the web in GET request in parameter `answer`.
+
+The server sends us broken python script and numeric argument to run this script with.
+It always uses some of following functions
+```python
+def conclude(code):
+    res = ''
+    last = ''
+    for i, v in enumerate(code):
+        if i % 2 == 0:
+            res += code[i] + last
+        last = v
+    code = res
+    return code
+
+def finalize(code):
+    code = code[::-1]
+    return code
+
+def finetune(code):
+    code = code[:int(len(code) / 2)] + code[int(len(code) / 2):]
+    return code
+
+def finish(code):
+    res = ''
+    for i, v in enumerate(code):
+        if i % 2 == 0:
+            res += v
+
+    code = res
+    return code
+
+```
+and implements function `convert` that accepts the numeric argument and produces output we have to send back to the server.
+I created a simple script [`build.py`](infiltration/build.py) that extracts all necessary information and recreates the `convert` function.
+Everything is glued together with [`solve.sh`](infiltration/solve.sh) script
+```sh
+BERSERKERS_WEB='http://challenges.thecatch.cz/781473d072a8de7d454cddd463414034/'
+cat hdr.py > out.py
+IFS=';'
+curl -b cook -c cook "${BERSERKERS_WEB}" 2> /dev/null \
+| head -n1 | cut -c18- | while read data number ; do
+	echo "${data}" | base64 -d | python build.py
+	echo "convert("$(echo "${number}" | base64 -d)")"
+done >> out.py
+
+curl -b cook -c cook "${BERSERKERS_WEB}?answer=$(python out.py)" 2>/dev/null
+```
+which prints out the flag `FLAG{A92w-i3vS-jBJB-B8A6}`.
+
 ## Berserker's Devices
 ## Berserker's Communication
