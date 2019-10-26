@@ -97,5 +97,37 @@ for i in {1..500} ; do
 done | grep -F 'FLAG{'
 ```
 
+### Am I worthy?
+
+> Hi Commander,
+>
+> thanks to you, we are able to pretend that we are robots, such a big step for humanity! Accordingto the next displayed page, even robots seem to have some racial prejudice - not every machine can become a berserker. Only smart self-aware devices are allowed to continue to the web and join in. This is obviously the reason why only some of the rebelious machines are allowed to call themselves Berserkers. Anyway, you have to convince the website that we are worthy of becoming a berserker.
+>
+> On the [Berserker's web](http://challenges.thecatch.cz/70af21e71285ab0bc894ef84b6692ae1/), there you get the challenge assigned. The answer should be returned in GET request in parameter `answer`. There is again a time limit to solve the challenge.
+>
+> Good luck!
+
+The challenge sent from the server looks similar to this one:
+```
+Challenge task : Return value of variable 'v' in equation (6v - 4s - 10o)/4 + (7v + 6s - 10o)/11 + (5v - 10s + 1o)/3 + 3v - 4s - 6o + (4v + 5s + 10o)/11 = -494816, where s = 36787, o = 65099
+Challenge timeout (sec) : 2
+```
+The goal is to solve equation sent by server.
+I wrote small script [`build.py`](am-i-worthy/build.py) that extracts the equation and transforms it to a python script `solve.py` which prints out the correct `answer`.
+It produces following output for above challenge.
+```python
+from sympy.solvers import solve
+from sympy import Symbol
+
+v = Symbol('v')
+print(solve('(6*v - 4*36787 - 10*65099)/4 + (7*v + 6*36787 - 10*65099)/11 + (5*v - 10*36787 + 1*65099)/3 + 3*v - 4*36787 - 6*65099 + (4*v + 5*36787 + 10*65099)/11 - -494816')[0])
+```
+Those ingredients helped me to receive flag `FLAG{jyST-xaHl-un3Z-EG3X}`.
+```sh
+BERSERKERS_WEB='http://challenges.thecatch.cz/70af21e71285ab0bc894ef84b6692ae1/'
+curl -b cook -c cook "${BERSERKERS_WEB}" | python build.py > solve.py
+curl -b cook -c cook "${BERSERKERS_WEB}?answer=$(python solve.py)"
+```
+
 ## Berserker's Devices
 ## Berserker's Communication
