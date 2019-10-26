@@ -129,5 +129,41 @@ curl -b cook -c cook "${BERSERKERS_WEB}" | python build.py > solve.py
 curl -b cook -c cook "${BERSERKERS_WEB}?answer=$(python solve.py)"
 ```
 
+### AI Update
+
+> Hi Commander,
+>
+> thanks to you, the web has recognized us worthy of installing so called Berserker's patch that will allow us to enhance our artificial intelligence and set the right opinions on humanity. You have to analyze the patch and find out how to simulate that it has beeen installed.
+>
+> Visit [Berserker's web](http://challenges.thecatch.cz/42fd967386d83d7ecc4c716c06633da9), the patch is available there. At the end of the installation procedure, some confirming code has to be returned to the web in GET request in parameter `answer`. There is again a time limit to install the patch.
+>
+> Good luck!
+
+The server sent us an update script unable to run due to a missing import.
+I found easiest to implement the missing part [`lib_self_aware_ai.py`](ai-update/lib_self_aware_ai.py)
+```python
+class root_interface:
+    def get_api(self):
+        return self
+
+    def unlock(self, data):
+        pass
+
+    def setrule(self, i, v):
+        pass
+
+    def updatefile_source(self, f, srv):
+        pass
+
+    def updatefile(self, f):
+        pass
+```
+and receive the flag `FLAG{PpyH-16Ib-qH1Z-Pbov}` with following script.
+```sh
+BERSERKERS_WEB='http://challenges.thecatch.cz/42fd967386d83d7ecc4c716c06633da9'
+curl -b cook -c cook -L "${BERSERKERS_WEB}/" | head -n1 | cut -c 18- | base64 -d | tail -n+12 | sed '/^</d' > update.py
+curl -b cook -c cook -L "${BERSERKERS_WEB}/?answer=$(python update.py)"
+```
+
 ## Berserker's Devices
 ## Berserker's Communication
